@@ -1,0 +1,21 @@
+<svg width="1600" height="1050" viewBox="0 0 1600 1050" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1050" fill="#5c4d42"/>
+  <path d="M0 710C190 610 330 650 480 732C670 836 819 830 1000 720C1210 592 1390 548 1600 620V1050H0V710Z" fill="#2f353a"/>
+  <path d="M0 0H1600V560C1392 492 1222 510 1052 596C810 719 614 685 412 578C244 489 112 462 0 502V0Z" fill="#7a6253"/>
+  <circle cx="1212" cy="220" r="150" fill="#f4623a" fill-opacity=".55"/>
+  <circle cx="420" cy="246" r="96" fill="#f8f9fa" fill-opacity=".17"/>
+  <rect x="188" y="686" width="360" height="214" rx="18" fill="#111827" fill-opacity=".72"/>
+  <rect x="230" y="728" width="202" height="20" rx="10" fill="#f4623a"/>
+  <rect x="230" y="776" width="278" height="14" rx="7" fill="#ffffff" fill-opacity=".7"/>
+  <rect x="230" y="812" width="238" height="14" rx="7" fill="#ffffff" fill-opacity=".45"/>
+  <rect x="1024" y="640" width="356" height="236" rx="18" fill="#111827" fill-opacity=".7"/>
+  <path d="M1080 800L1154 720L1214 776L1270 708L1330 800H1080Z" fill="#f4623a"/>
+  <path d="M0 0H1600V1050H0V0Z" fill="url(#grain)" fill-opacity=".16"/>
+  <defs>
+    <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="12" r="1" fill="#fff"/>
+      <circle cx="44" cy="28" r="1" fill="#fff"/>
+      <circle cx="62" cy="60" r="1" fill="#fff"/>
+    </pattern>
+  </defs>
+</svg>

@@ -1,6 +1,6 @@
 # Personal Portfolio Website
 
-A modern Django-powered personal portfolio website for a software engineer, AI engineer, or full-stack developer. The project includes a premium one-page portfolio UI with a sticky navbar, animated hero section, skill progress bars, featured projects, services, timeline, contact form, and responsive styling.
+A modern Django-powered personal portfolio website for a software engineer, AI engineer, or full-stack developer. The project uses a Start Bootstrap Creative-inspired one-page layout with a fixed navbar, masthead hero, orange accent section styling, project grid overlays, skill progress bars, services, contact form, and responsive styling.
 
 ## Project Information
 
@@ -15,11 +15,11 @@ A modern Django-powered personal portfolio website for a software engineer, AI e
 ## Features
 
 - Modern glassmorphism-inspired UI
-- Gradient background and animated visual shapes
+- Start Bootstrap Creative-inspired one-page design
+- Full-screen masthead with local visual background
 - Sticky responsive navigation
 - Mobile hamburger menu
 - Smooth scrolling
-- Typing animation in the hero section
 - Scroll reveal animations
 - Animated skill progress bars
 - Project cards with hover effects
@@ -53,6 +53,10 @@ A modern Django-powered personal portfolio website for a software engineer, AI e
 │   ├── files/
 │   │   └── .gitkeep
 │   ├── images/
+│   │   ├── creative-masthead.svg
+│   │   ├── portfolio-1.svg
+│   │   ├── portfolio-2.svg
+│   │   ├── portfolio-3.svg
 │   │   └── profile-placeholder.svg
 │   └── js/
 │       └── main.js
