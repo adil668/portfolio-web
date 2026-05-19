@@ -25,6 +25,18 @@
             <li><a href="#projects" class="nav-link">Projects</a></li>
             <li><a href="#services" class="nav-link">Services</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
+            {% if user.is_authenticated %}
+            <li><span class="nav-user">Hi, {{ user.username }}</span></li>
+            <li>
+                <form class="nav-logout-form" action="{% url 'main:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="nav-auth-button" type="submit">Logout</button>
+                </form>
+            </li>
+            {% else %}
+            <li><a href="{% url 'main:login' %}" class="nav-link nav-auth-link">Login</a></li>
+            <li><a href="{% url 'main:signup' %}" class="nav-auth-button">Sign Up</a></li>
+            {% endif %}
         </ul>
     </nav>
 

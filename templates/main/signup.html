@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Alex Morgan Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="auth-page">
+    <main class="auth-shell">
+        <a class="auth-logo" href="{% url 'main:home' %}">AM<span>.</span></a>
+        <section class="auth-card reveal visible">
+            <div class="auth-intro">
+                <p class="eyebrow">Start Here</p>
+                <h1>Create your account.</h1>
+                <p>Sign up to explore protected portfolio experiences and future member-only content.</p>
+            </div>
+
+            <form class="auth-form" method="post" novalidate>
+                {% csrf_token %}
+                {% for field in form %}
+                <label>
+                    <span>{{ field.label }}</span>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <small>{{ field.help_text }}</small>
+                    {% endif %}
+                    {{ field.errors }}
+                </label>
+                {% endfor %}
+
+                <button class="btn primary" type="submit">Create Account</button>
+            </form>
+
+            <p class="auth-switch">
+                Already have an account? <a href="{% url 'main:login' %}">Login</a>
+            </p>
+        </section>
+    </main>
+</body>
+</html>

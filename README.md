@@ -26,6 +26,9 @@ A modern Django-powered personal portfolio website for a software engineer, AI e
 - Services section
 - Experience and education timeline
 - Contact form UI with JavaScript feedback
+- Login page using Django authentication
+- Signup page using Django user creation
+- Optional WAMP/MySQL database connection
 - Footer with social links and back-to-top button
 
 ## Folder Structure
@@ -35,6 +38,7 @@ A modern Django-powered personal portfolio website for a software engineer, AI e
 ├── main/
 │   ├── __init__.py
 │   ├── apps.py
+│   ├── forms.py
 │   ├── urls.py
 │   └── views.py
 ├── portfolio_site/
@@ -107,6 +111,94 @@ Open the site in your browser:
 
 ```text
 http://127.0.0.1:8000/
+```
+
+## Login and Signup Pages
+
+The project includes Django authentication pages:
+
+```text
+http://127.0.0.1:8000/login/
+http://127.0.0.1:8000/signup/
+```
+
+After signup, the new user is automatically logged in and redirected to the portfolio homepage. The navbar changes based on authentication status.
+
+## WAMP/MySQL Setup
+
+SQLite is still the default database so the project can run immediately. To connect the site to WAMP Server, use MySQL from WAMP and enable the MySQL settings with environment variables.
+
+### 1. Start WAMP
+
+Start WAMP Server and make sure the icon is green. This means Apache and MySQL are running.
+
+### 2. Create the database
+
+Open phpMyAdmin:
+
+```text
+http://localhost/phpmyadmin/
+```
+
+Create a database named:
+
+```text
+portfolio_web
+```
+
+Default WAMP credentials are commonly:
+
+```text
+Username: root
+Password: empty
+Host: 127.0.0.1
+Port: 3306
+```
+
+If your WAMP uses different credentials, use those in the environment variables below.
+
+### 3. Install MySQL dependency
+
+```bash
+pip install -r requirements.txt
+```
+
+If `mysqlclient` fails to install on Windows, install the required MySQL/MariaDB development connector or use a prebuilt wheel that matches your Python version.
+
+### 4. Enable WAMP/MySQL for this Django project
+
+PowerShell:
+
+```powershell
+$env:USE_WAMP_MYSQL="True"
+$env:WAMP_DB_NAME="portfolio_web"
+$env:WAMP_DB_USER="root"
+$env:WAMP_DB_PASSWORD=""
+$env:WAMP_DB_HOST="127.0.0.1"
+$env:WAMP_DB_PORT="3306"
+```
+
+Command Prompt:
+
+```cmd
+set USE_WAMP_MYSQL=True
+set WAMP_DB_NAME=portfolio_web
+set WAMP_DB_USER=root
+set WAMP_DB_PASSWORD=
+set WAMP_DB_HOST=127.0.0.1
+set WAMP_DB_PORT=3306
+```
+
+### 5. Create Django tables in MySQL
+
+```bash
+python manage.py migrate
+```
+
+### 6. Run the site with WAMP/MySQL enabled
+
+```bash
+python manage.py runserver
 ```
 
 ## Personalization Guide
@@ -239,6 +331,14 @@ Create an admin user:
 
 ```bash
 python manage.py createsuperuser
+```
+
+Run with WAMP/MySQL in PowerShell:
+
+```powershell
+$env:USE_WAMP_MYSQL="True"
+python manage.py migrate
+python manage.py runserver
 ```
 
 Open Django shell:

@@ -1,4 +1,10 @@
-from django.shortcuts import render
+from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+
+from .forms import SignUpForm
 
 
 def home(request):
@@ -57,3 +63,34 @@ def home(request):
         ],
     }
     return render(request, "main/home.html", context)
+
+
+class PortfolioLoginView(LoginView):
+    """Login page using Django authentication."""
+
+    template_name = "main/login.html"
+    authentication_form = AuthenticationForm
+    redirect_authenticated_user = True
+
+
+class PortfolioLogoutView(LogoutView):
+    """Logout then return to the portfolio homepage."""
+
+    next_page = reverse_lazy("main:home")
+
+
+def signup(request):
+    """Create a new user account and sign the user in immediately."""
+    if request.user.is_authenticated:
+        return redirect("main:home")
+
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("main:home")
+    else:
+        form = SignUpForm()
+
+    return render(request, "main/signup.html", {"form": form})

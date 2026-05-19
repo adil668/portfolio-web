@@ -1,16 +1,21 @@
 """
 Django settings for portfolio_site.
 
-This project uses the default SQLite database and serves templates/static files
-from project-level folders so the portfolio is easy to customize.
+SQLite is the default for quick local setup. Set USE_WAMP_MYSQL=True to connect
+the project to a WAMP MySQL database.
 """
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-change-this-key-before-deployment"
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,testserver").split(",")
+    if host.strip()
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -52,12 +57,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "portfolio_site.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if os.getenv("USE_WAMP_MYSQL", "False").lower() == "true":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": os.getenv("WAMP_DB_NAME", "portfolio_web"),
+            "USER": os.getenv("WAMP_DB_USER", "root"),
+            "PASSWORD": os.getenv("WAMP_DB_PASSWORD", ""),
+            "HOST": os.getenv("WAMP_DB_HOST", "127.0.0.1"),
+            "PORT": os.getenv("WAMP_DB_PORT", "3306"),
+            "OPTIONS": {
+                "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -75,3 +95,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = "main:login"
+LOGIN_REDIRECT_URL = "main:home"
+LOGOUT_REDIRECT_URL = "main:home"
